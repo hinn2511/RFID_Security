@@ -1,5 +1,5 @@
-import GUI.MainApplication;
-import GUI.RfidTag;
+import gui.MainApplication;
+import gui.RfidTag;
 import sqlHandler.SqlConnector;
 import tagReader.ReadTagsFromReader;
 

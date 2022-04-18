@@ -5,7 +5,7 @@ import com.impinj.octane.Tag;
 import com.impinj.octane.TagReport;
 import com.impinj.octane.TagReportListener;
 
-import GUI.MainApplication;
+import gui.MainApplication;
 import sqlHandler.TagInfo;
 import sqlHandler.SqlQuery;
 
