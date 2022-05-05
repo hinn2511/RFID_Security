@@ -6,8 +6,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="lib/OctaneSDKJava-3.0.0.0-jar-with-dependencies.jar" sourcepath="lib/OctaneSDKJava-3.0.0.0-jar-with-dependencies.jar"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.27.jar"/>
+	<classpathentry kind="lib" path="lib/OctaneSDKJava-3.0.0.0-jar-with-dependencies.jar" sourcepath="C:/Users/Hin/Downloads/documentation/javadoc"/>
 	<classpathentry kind="lib" path="lib/OctaneSDKJava-3.0.0.0.jar"/>
+	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
+	<classpathentry kind="lib" path="lib/LGoodDatePicker-11.2.1.jar" sourcepath="lib/LGoodDatePicker-11.2.1-javadoc.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/mysql-connector-java-8.0.27.jar"/>
+	<classpathentry kind="lib" path="lib/spire.xls-5.4.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,7 +1,6 @@
 import gui.MainApplication;
-import gui.RfidTag;
 import sqlHandler.SqlConnector;
-import tagReader.ReadTagsFromReader;
+import tagReader.ReadTags;
 
 public class main {
 
@@ -12,15 +11,11 @@ public class main {
 		connector.connect();
 		
 		//Start reading 
-		//ReadTagsFromReader readTagsFromReader = new ReadTagsFromReader();
+		ReadTags readTags = new ReadTags();
 		
 		//Show application
 		MainApplication app = new MainApplication();
 		app.setVisible(true);
-		
-		//Stimulating rfid tag swipe
-		RfidTag tag = new RfidTag();
-		tag.setVisible(true);
 		
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 	        public void run() {
