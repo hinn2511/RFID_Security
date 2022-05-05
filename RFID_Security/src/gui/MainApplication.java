@@ -121,7 +121,7 @@ public class MainApplication extends JFrame {
 		columnModel.getColumn(2).setMaxWidth(220);
 		
 		tblCheckout.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
-		
+		tblCheckout.setDefaultEditor(Object.class, null);
 		
 		///////////////////// History ///////////////////////
 		
@@ -150,7 +150,7 @@ public class MainApplication extends JFrame {
 		tblHistory.setModel(historyModel);
 		
 		tblHistory.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
-		
+		tblHistory.setDefaultEditor(Object.class, null);
 		
 		JPanel rightHistoryPanel = new JPanel();
 		rightHistoryPanel.setBackground(new Color(248, 248, 255));
@@ -275,7 +275,7 @@ public class MainApplication extends JFrame {
 		tblReport.setBackground(Color.WHITE);
 		scrollPane_1.setViewportView(tblReport);
 		tblReport.setModel(reportModel);
-		
+		tblReport.setDefaultEditor(Object.class, null);
 		
 		JPanel rightReportPanel = new JPanel();
 		rightReportPanel.setBackground(new Color(248, 248, 255));
