@@ -1,4 +1,4 @@
-package sqlHandler;
+package Model;
 
 import java.sql.Connection;
 import java.sql.*;

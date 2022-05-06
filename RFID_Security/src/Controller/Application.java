@@ -1,8 +1,8 @@
-import gui.MainApplication;
-import sqlHandler.SqlConnector;
-import tagReader.ReadTags;
+package Controller;
+import Model.SqlConnector;
+import View.MainApplication;
 
-public class main {
+public class Application {
 
 	public static void main(String[] args) {
 		

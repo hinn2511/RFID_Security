@@ -1,13 +1,13 @@
-package tagReader;
+package Controller;
 
 import com.impinj.octane.ImpinjReader;
 import com.impinj.octane.Tag;
 import com.impinj.octane.TagReport;
 import com.impinj.octane.TagReportListener;
 
-import gui.MainApplication;
-import sqlHandler.SqlQuery;
-import sqlHandler.model.CheckoutInfo;
+import Model.SqlQuery;
+import Model.Entities.CheckoutInfo;
+import View.MainApplication;
 
 import java.io.File;
 import java.util.HashMap;

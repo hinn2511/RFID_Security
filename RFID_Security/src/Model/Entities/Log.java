@@ -1,4 +1,4 @@
-package sqlHandler.model;
+package Model.Entities;
 
 import java.time.LocalDateTime;
 

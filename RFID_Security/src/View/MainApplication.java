@@ -1,4 +1,4 @@
-package gui;
+package View;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -7,11 +7,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JTabbedPane;
 import net.miginfocom.swing.MigLayout;
-import sqlHandler.SqlQuery;
-import sqlHandler.model.CheckoutInfo;
-import sqlHandler.model.FilterQuery;
-import sqlHandler.model.HistoryResult;
-import sqlHandler.model.ReportResult;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,6 +20,13 @@ import com.github.lgooddatepicker.components.DatePicker;
 import com.spire.xls.ExcelVersion;
 import com.spire.xls.Workbook;
 import com.spire.xls.Worksheet;
+
+import Model.SqlQuery;
+import Model.Entities.CheckoutInfo;
+import Model.Entities.FilterQuery;
+import Model.Entities.HistoryResult;
+import Model.Entities.ReportResult;
+
 import javax.swing.JScrollPane;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -98,7 +100,7 @@ public class MainApplication extends JFrame {
 		contentPane.add(tabbedPane, "cell 0 1,grow");
 		
 		
-		/////////////// Check out  /////////////////////
+		// Check out
 
 		JPanel checkoutPanel = new JPanel();
 		tabbedPane.addTab("Checkout", null, checkoutPanel, null);
@@ -123,7 +125,7 @@ public class MainApplication extends JFrame {
 		tblCheckout.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
 		tblCheckout.setDefaultEditor(Object.class, null);
 		
-		///////////////////// History ///////////////////////
+		// History 
 		
 		JPanel historyPanel = new JPanel();
 		historyPanel.setBackground(new Color(248, 248, 255));
@@ -250,7 +252,7 @@ public class MainApplication extends JFrame {
 			}
 		});
 		
-		/////////////////////  Report /////////////////////////
+		//  Report
 		
 		JPanel reportPanel = new JPanel();
 		reportPanel.setBackground(new Color(248, 248, 255));

@@ -1,8 +1,8 @@
-package tagReader;
+package Controller;
 
 import com.impinj.octane.*;
 
-import sqlHandler.SqlConnector;
+import Model.SqlConnector;
 
 import java.util.Scanner;
 

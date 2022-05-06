@@ -1,4 +1,4 @@
-package sqlHandler;
+package Model;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,10 +8,11 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import sqlHandler.model.CheckoutInfo;
-import sqlHandler.model.FilterQuery;
-import sqlHandler.model.HistoryResult;
-import sqlHandler.model.ReportResult;
+
+import Model.Entities.CheckoutInfo;
+import Model.Entities.FilterQuery;
+import Model.Entities.HistoryResult;
+import Model.Entities.ReportResult;
 
 public class SqlQuery {
 	public static int addLog(CheckoutInfo info) {

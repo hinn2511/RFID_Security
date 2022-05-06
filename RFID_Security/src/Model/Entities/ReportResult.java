@@ -1,4 +1,4 @@
-package sqlHandler.model;
+package Model.Entities;
 
 public class ReportResult {
 	String productLineID;
