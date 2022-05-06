@@ -19,6 +19,7 @@ import javax.sound.sampled.Clip;
 public class TagReportListenerImplementation implements TagReportListener {
 	HashMap<String, Long> tagTimestamp = new HashMap<>();
 	int delayTimeInMilis = 10000;
+	static Clip clip;
 
 	@Override
 	public void onTagReported(ImpinjReader reader, TagReport report) {
@@ -34,13 +35,13 @@ public class TagReportListenerImplementation implements TagReportListener {
 			// Neu tag chua ton tai, them tag vao hashmap
 			if (tagTimestamp.get(tagId) == null) {
 				tagTimestamp.putIfAbsent(tagId, timestamp);
-				checkTagId(tagId, t.getAntennaPortNumber() > 0 ? t.getAntennaPortNumber() : 0);
+				checkTagId(tagId, t.getAntennaPortNumber() > 0 ? t.getAntennaPortNumber() : 1);
 			}
 			// Neu tag da ton tai, kiem tra tag
 			else {
 				if (timestamp - tagTimestamp.get(tagId) > delayTimeInMilis) {
 					tagTimestamp.put(tagId, System.currentTimeMillis());
-					checkTagId(tagId, t.getAntennaPortNumber() > 0 ? t.getAntennaPortNumber() : 0);
+					checkTagId(tagId, t.getAntennaPortNumber() > 0 ? t.getAntennaPortNumber() : 1);
 				}
 			}
 		}
@@ -59,11 +60,13 @@ public class TagReportListenerImplementation implements TagReportListener {
 		}
 	}
 
-	void alert() {
+	public static void alert() {
 		File soundFile = new File("src/assets/alarm_1.wav");
 		try {
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-			Clip clip = AudioSystem.getClip();
+			if(clip.isOpen()) {
+				clip.close();
+			}
 			clip.open(audioIn);
 			clip.start();
 		} catch (Exception e) {

@@ -16,6 +16,7 @@ import java.awt.Font;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -30,7 +31,11 @@ public class RfidTag extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtTagId;
 	
-	public RfidTag() {
+	static boolean alarming = false;
+	static Clip clip;
+	
+	public RfidTag() throws LineUnavailableException {
+		clip = AudioSystem.getClip();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -82,8 +87,9 @@ public class RfidTag extends JFrame {
 			information = SqlQuery.isProductPurchased(tagId);
 
 			if (information != null) {
-				if (!information.isPurchased())
+				if (!information.isPurchased()) {
 					alert();
+				}
 				information.setGateNumber(gateNumber);
 				MainApplication.addNewLineToCheckoutTable(information);
 				SqlQuery.addLog(information);
@@ -94,7 +100,9 @@ public class RfidTag extends JFrame {
 		File soundFile = new File("src/assets/alarm_1.wav");
 		try {
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-			Clip clip = AudioSystem.getClip();
+			if(clip.isOpen()) {
+				clip.close();
+			}
 			clip.open(audioIn);
 			clip.start();
 		} catch (Exception e) {

@@ -1,10 +1,15 @@
 package testing;
+import java.io.IOException;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import gui.MainApplication;
 import sqlHandler.SqlConnector;
 
 public class testMain {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		
 		//Connect to MySQL
 		SqlConnector connector = new SqlConnector();
