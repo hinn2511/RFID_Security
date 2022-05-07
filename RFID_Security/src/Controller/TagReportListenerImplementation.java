@@ -18,7 +18,7 @@ import javax.sound.sampled.Clip;
 
 public class TagReportListenerImplementation implements TagReportListener {
 	HashMap<String, Long> tagTimestamp = new HashMap<>();
-	int delayTimeInMilis = 10000;
+	int delayTimeInMilis = 5000;
 	static Clip clip;
 
 	@Override

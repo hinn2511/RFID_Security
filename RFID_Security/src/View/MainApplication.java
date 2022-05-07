@@ -433,7 +433,7 @@ public class MainApplication extends JFrame {
 		checkoutRow[3] = tag.getTime().format(formatter).toString();
 		checkoutRow[4] = tag.getGateNumber();
 		checkoutRow[5] = tag.isPurchased() ? "Purchased" : "Not purchased";
-		checkoutModel.addRow(checkoutRow);
+		checkoutModel.insertRow(0, checkoutRow);
 		tblCheckout.revalidate();
 		tblCheckout.repaint();
 	}
