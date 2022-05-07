@@ -115,7 +115,7 @@ public class SqlQuery {
 			sql += " AND l.status = '" + query.getStatus() + "'";
 		
 		if(!query.getFilter().toLowerCase().equals("none"))
-			sql += " AND " + query.getFilter() +" = '" + query.getFilterValue() + "'";
+			sql += " AND " + query.getFilter() +" LIKE '%" + query.getFilterValue() + "%'";
 		
 		if(!query.getOrderBy().toLowerCase().equals("none"))
 			sql += " ORDER BY " + query.getOrderBy();
@@ -166,7 +166,7 @@ public class SqlQuery {
 			sql += " AND l.status = '" + query.getStatus() + "'";
 		
 		if(!query.getFilter().toLowerCase().equals("none"))
-			sql += " AND " + query.getFilter() +" = '" + query.getFilterValue() + "'";
+			sql += " AND " + query.getFilter() +" LIKE '%" + query.getFilterValue() + "%'";
 		
 		sql += " GROUP BY pl.product_line_id";
 		
