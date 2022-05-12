@@ -52,10 +52,10 @@ public class FilterQuery {
 			this.orderBy = "name DESC";
 			break;
 		case "Time passed (Newest)":
-			this.orderBy = "time ASC";
-			break;
-		case "Time passed (Oldest))":
 			this.orderBy = "time DESC";
+			break;
+		case "Time passed (Oldest)":
+			this.orderBy = "time ASC";
 			break;
 		case "Gate number (Asc)":
 			this.orderBy = "gate_number ASC";

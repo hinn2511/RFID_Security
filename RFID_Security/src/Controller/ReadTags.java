@@ -8,12 +8,28 @@ import java.util.Scanner;
 
 
 public class ReadTags {
+	static ImpinjReader reader;
+	public static void startReading() {
+		try {
+			reader.start();
+		} catch (OctaneSdkException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void stopReading() {
+		try {
+			reader.stop();
+		} catch (OctaneSdkException e) {
+			e.printStackTrace();
+		}
+	}
 
     public ReadTags() {
     	try {
             String hostname = "192.168.1.1";
             
-            ImpinjReader reader = new ImpinjReader();
+            reader = new ImpinjReader();
 
             System.out.println("Connecting");
             reader.connect(hostname);
@@ -35,20 +51,9 @@ public class ReadTags {
             antennas.getAntenna((short) 1).setRxSensitivityinDbm(-70);
 
             reader.setTagReportListener(new TagReportListenerImplementation());
-
-            System.out.println("Applying Settings");
             reader.applySettings(settings);
 
-            System.out.println("Starting");
-    		
-            reader.start();
-
-            System.out.println("Press Enter to exit.");
-            Scanner s = new Scanner(System.in);
-            s.nextLine();
-
-            reader.stop();
-            reader.disconnect();
+         
         } catch (OctaneSdkException ex) {
             System.out.println(ex.getMessage());
         } catch (Exception ex) {

@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 public class CustomTableCellRenderer extends DefaultTableCellRenderer {
 	
+	private static final long serialVersionUID = 1L;
 	private final Color whiteColor = Color.WHITE;
 	private final Color greenColor = Color.GREEN;
 	private final Color redColor = Color.RED;

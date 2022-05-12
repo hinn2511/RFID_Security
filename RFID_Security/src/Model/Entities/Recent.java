@@ -2,7 +2,7 @@ package Model.Entities;
 
 import java.time.LocalDateTime;
 
-public class CheckoutInfo {
+public class Recent {
 	private String tagId;
 	private String productId;
 	private String productName;
@@ -10,7 +10,7 @@ public class CheckoutInfo {
 	private int gateNumber;
 	private LocalDateTime time;
 	
-	public CheckoutInfo(String tagId, String productId, String productName, boolean isPurchased, int gateNumber,
+	public Recent(String tagId, String productId, String productName, boolean isPurchased, int gateNumber,
 			LocalDateTime time) {
 		super();
 		this.tagId = tagId;
@@ -21,7 +21,7 @@ public class CheckoutInfo {
 		this.time = time;
 	}
 
-	public CheckoutInfo() {
+	public Recent() {
 		super();
 	}
 

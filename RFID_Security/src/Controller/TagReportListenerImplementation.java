@@ -6,15 +6,18 @@ import com.impinj.octane.TagReport;
 import com.impinj.octane.TagReportListener;
 
 import Model.SqlQuery;
-import Model.Entities.CheckoutInfo;
-import View.MainApplication;
+import Model.Entities.Recent;
+import View.AlertGUI;
+import View.ApplicationGUI;
 
 import java.io.File;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.JOptionPane;
 
 public class TagReportListenerImplementation implements TagReportListener {
 	HashMap<String, Long> tagTimestamp = new HashMap<>();
@@ -48,29 +51,22 @@ public class TagReportListenerImplementation implements TagReportListener {
 	}
 
 	void checkTagId(String tagId, int gateNumber) {
-		CheckoutInfo information = new CheckoutInfo();
-		information = SqlQuery.isProductPurchased(tagId);
+		Recent information = new Recent();
+		information = Controller.isProductPurchased(tagId);
 
 		if (information != null) {
 			information.setGateNumber(gateNumber);
 			SqlQuery.addLog(information);
-			if (!information.isPurchased())
-				alert();
-			MainApplication.addNewLineToCheckoutTable(information);
+			if (!information.isPurchased()) {
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+				String time = information.getTime().format(formatter).toString();
+				AlertGUI alert = new AlertGUI(information.getTagId(), information.getProductId(),
+						information.getProductName(), time, String.valueOf(information.getGateNumber()));
+				alert.setVisible(true);
+			}
+			ApplicationGUI.addNewLineToRecentTable(information);
 		}
 	}
 
-	public static void alert() {
-		File soundFile = new File("src/assets/alarm_1.wav");
-		try {
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-			if(clip.isOpen()) {
-				clip.close();
-			}
-			clip.open(audioIn);
-			clip.start();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 }

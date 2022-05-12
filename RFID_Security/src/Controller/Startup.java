@@ -1,8 +1,10 @@
 package Controller;
-import Model.SqlConnector;
-import View.MainApplication;
 
-public class Application {
+import Model.SqlConnector;
+import View.ApplicationGUI;
+
+public class Startup {
+	static ApplicationGUI applicationGui;
 
 	public static void main(String[] args) {
 		
@@ -10,12 +12,12 @@ public class Application {
 		SqlConnector connector = new SqlConnector();
 		connector.connect();
 		
-		//Start reading 
+		applicationGui = new ApplicationGUI();
+		applicationGui.setVisible(true);
+		
+		
 		ReadTags readTags = new ReadTags();
 		
-		//Show application
-		MainApplication app = new MainApplication();
-		app.setVisible(true);
 		
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 	        public void run() {
