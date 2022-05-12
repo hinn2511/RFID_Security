@@ -58,8 +58,7 @@ public class TagReportListenerImplementation implements TagReportListener {
 			information.setGateNumber(gateNumber);
 			SqlQuery.addLog(information);
 			if (!information.isPurchased()) {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-				String time = information.getTime().format(formatter).toString();
+				String time = information.getTime().format(Controller.formatter).toString();
 				AlertGUI alert = new AlertGUI(information.getTagId(), information.getProductId(),
 						information.getProductName(), time, String.valueOf(information.getGateNumber()));
 				alert.setVisible(true);

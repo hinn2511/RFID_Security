@@ -114,11 +114,11 @@ public class ApplicationGUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(btnStartStop.getText().equals("Start")) {
-					//ReadTags.startReading();
+					ReadTags.startReading();
 					btnStartStop.setText("Stop");
 				}
 				else {
-					//ReadTags.stopReading();
+					ReadTags.stopReading();
 					btnStartStop.setText("Start");
 				}
 			}
@@ -549,8 +549,7 @@ public class ApplicationGUI extends JFrame {
 		recentRow[0] = tag.getTagId();
 		recentRow[1] = tag.getProductId();
 		recentRow[2] = tag.getProductName();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-		recentRow[3] = tag.getTime().format(formatter).toString();
+		recentRow[3] = tag.getTime().format(Controller.formatter).toString();
 		recentRow[4] = tag.getGateNumber();
 		recentRow[5] = tag.isPurchased() ? "Purchased" : "Not purchased";
 		recentModel.insertRow(0, recentRow);

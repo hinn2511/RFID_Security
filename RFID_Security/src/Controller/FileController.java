@@ -40,9 +40,8 @@ public class FileController {
 		sheet.getRange().get("A2").getCellStyle().setHorizontalAlignment(HorizontalAlignType.Center);
 		sheet.insertArray(sheetTime, 2, 1, false);
 
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		LocalDateTime now = LocalDateTime.now();
-		String[] sheetMadeBy = new String[] {"Created at " + dtf.format(now)};
+		String[] sheetMadeBy = new String[] {"Created at " + Controller.formatter.format(now)};
 		sheet.getRange().get("A3:C3").merge();
 		sheet.getRange().get("A3").getCellStyle().setHorizontalAlignment(HorizontalAlignType.Center);
 		sheet.insertArray(sheetMadeBy, 3, 1, false);

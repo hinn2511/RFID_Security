@@ -3,6 +3,7 @@ package Controller;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import Model.SqlQuery;
@@ -15,6 +16,7 @@ import Model.Entities.Tag;
 import Model.Entities.TagResult;
 
 public class Controller {
+	public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 	
 	public static boolean updateTag(Tag tag) {
 		return SqlQuery.updateTag(tag);
