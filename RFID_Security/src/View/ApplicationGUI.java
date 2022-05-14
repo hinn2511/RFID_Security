@@ -115,6 +115,9 @@ public class ApplicationGUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(btnStartStop.getText().equals("Start")) {
 					ReadTags.startReading();
+					recentModel.setRowCount(0);
+					tblRecent.revalidate();
+					tblRecent.repaint();
 					btnStartStop.setText("Stop");
 				}
 				else {
