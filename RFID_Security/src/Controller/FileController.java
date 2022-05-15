@@ -18,7 +18,7 @@ import Model.Entities.ReportResult;
 import Model.Entities.Tag;
 
 public class FileController {
-	public static String exportReportFile(String fromDate, String toDate, String status, Integer totalQuantity, ArrayList<ReportResult> reports) {
+	public static String exportReportFile(String fromDate, String toDate, String status, Integer totalQuantity, Double totalValue ,ArrayList<ReportResult> reports) {
 		Workbook wb = new Workbook();
 		Worksheet sheet = wb.getWorksheets().get(0);
 		
@@ -28,7 +28,7 @@ public class FileController {
 
 		 
 		String[] sheetTitle = new String[] {"Security Report"};
-		sheet.getRange().get("A1:C1").merge();
+		sheet.getRange().get("A1:E1").merge();
 		sheet.getRange().get("A1").getCellStyle().setHorizontalAlignment(HorizontalAlignType.Center);
 		sheet.getCellRange("A1").getCellStyle().getExcelFont().setSize(20);
 		sheet.getCellRange("A1").getCellStyle().getExcelFont().isBold(true);
@@ -36,37 +36,42 @@ public class FileController {
 		sheet.insertArray(sheetTitle, 1, 1, false);
 
 		String[] sheetTime = new String[] { "From " + fromDate + " to " + toDate };
-		sheet.getRange().get("A2:C2").merge();
+		sheet.getRange().get("A2:E2").merge();
 		sheet.getRange().get("A2").getCellStyle().setHorizontalAlignment(HorizontalAlignType.Center);
 		sheet.insertArray(sheetTime, 2, 1, false);
 
 		LocalDateTime now = LocalDateTime.now();
 		String[] sheetMadeBy = new String[] {"Created at " + Controller.formatter.format(now)};
-		sheet.getRange().get("A3:C3").merge();
+		sheet.getRange().get("A3:E3").merge();
 		sheet.getRange().get("A3").getCellStyle().setHorizontalAlignment(HorizontalAlignType.Center);
 		sheet.insertArray(sheetMadeBy, 3, 1, false);
 
 		String st = status.equals("All") ? "All status" : status;
 		String[] sheetStatus = new String[] { "Status: " + st };
-		sheet.getRange().get("A4:C4").merge();
+		sheet.getRange().get("A4:E4").merge();
 		sheet.getRange().get("A4").getCellStyle().setHorizontalAlignment(HorizontalAlignType.Center);
 		sheet.insertArray(sheetStatus, 4, 1, false);
 
-		String[] sheetHeadline = new String[] { "Product line ID", "Product line name", "Quantity" };
-		sheet.insertArray(sheetHeadline, 7, 1, false);
+		String[] sheetHeadline = new String[] { "Product line ID", "Product line name", "Quantity", "Price (USD)", "Total (USD)" };
+		sheet.insertArray(sheetHeadline, 8, 1, false);
 
-		int line = 8;
+		int line = 9;
 		for (ReportResult rp : reports) {
 			sheet.insertArray(new String[] { rp.getProductLineID(), rp.getProductLineName(),
-					String.valueOf(rp.getQuantity()) }, line++, 1, false);
+					String.valueOf(rp.getQuantity()), String.valueOf(rp.getPrice()), String.valueOf(rp.getQuantity() * rp.getPrice()) }, line++, 1, false);
 		}
 
 		String[] sheetTotalQuantity = new String[] { "Total quantity: " + String.valueOf(totalQuantity) };
-		sheet.getRange().get("A5:C5").merge();
+		sheet.getRange().get("A5:E5").merge();
 		sheet.getRange().get("A5").getCellStyle().setHorizontalAlignment(HorizontalAlignType.Center);
 		sheet.insertArray(sheetTotalQuantity, 5, 1, false);
 		
-		CellRange cr = sheet.getCellRange(7, sheet.getFirstColumn(), sheet.getLastRow(), 3);
+		String[] sheetTotalValue = new String[] { "Total value: " + String.valueOf(totalValue)  + " USD"};
+		sheet.getRange().get("A6:E6").merge();
+		sheet.getRange().get("A6").getCellStyle().setHorizontalAlignment(HorizontalAlignType.Center);
+		sheet.insertArray(sheetTotalValue, 6, 1, false);
+		
+		CellRange cr = sheet.getCellRange(8, sheet.getFirstColumn(), sheet.getLastRow(), 5);
 		cr.getBorders().setLineStyle(LineStyleType.Thin);
         cr.getBorders().getByBordersLineType(BordersLineType.DiagonalDown).setLineStyle(LineStyleType.None);
         cr.getBorders().getByBordersLineType(BordersLineType.DiagonalUp).setLineStyle(LineStyleType.None);

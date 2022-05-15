@@ -4,12 +4,14 @@ public class ReportResult {
 	String productLineID;
 	String productLineName;
 	int quantity;
+	double price;
 	
-	public ReportResult(String productLineID, String productLineName, int quantity) {
+	public ReportResult(String productLineID, String productLineName, int quantity, double price) {
 		super();
 		this.productLineID = productLineID;
 		this.productLineName = productLineName;
 		this.quantity = quantity;
+		this.price = price;
 	}
 
 	public String getProductLineID() {
@@ -35,6 +37,15 @@ public class ReportResult {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
 	
 	
 }

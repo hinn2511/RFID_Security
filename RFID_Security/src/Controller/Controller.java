@@ -47,5 +47,12 @@ public class Controller {
 				.toLocalDateTime();
 	}
 	
+	public static String dateFormater(String d) {
+		String[] f = d.split(" ");
+		String date = f[0];
+		String time = f[1];
+		String[] s = date.split("-");
+		return s[2] + "-" + s[1] + "-" + s[0] + " " + time;
+	}
 	
 }

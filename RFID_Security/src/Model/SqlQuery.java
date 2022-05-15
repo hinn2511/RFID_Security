@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 
+import Controller.Controller;
 import Controller.Startup;
 import Model.Entities.Recent;
 import Model.Entities.FilterQuery;
@@ -133,7 +134,7 @@ public class SqlQuery {
 			while (result.next()) {
 				if (result != null) {
 					HistoryResult hr = new HistoryResult(result.getString(1), result.getString(2), result.getString(3),
-							result.getString(4), result.getInt(5), result.getString(6));
+							Controller.dateFormater(result.getString(4)), result.getInt(5), result.getString(6));
 					results.add(hr);
 				}
 			}
@@ -208,7 +209,7 @@ public class SqlQuery {
 	}
 
 	public static ArrayList<ReportResult> getReport(FilterQuery query) {
-		String sql = "SELECT  pl.product_line_id, pl.name, COUNT(pl.product_line_id) as quantity" + " FROM log l"
+		String sql = "SELECT  pl.product_line_id, pl.name, COUNT(pl.product_line_id) as quantity, pl.price" + " FROM log l"
 				+ " INNER JOIN (SELECT tag_id, MAX(time) AS lastTime FROM log GROUP BY tag_id) lastTimePassed"
 				+ " ON l.tag_id = lastTimePassed.tag_id AND l.time = lastTimePassed.lastTime"
 				+ " INNER JOIN tag t ON l.tag_id = t.tag_id"
@@ -236,7 +237,7 @@ public class SqlQuery {
 
 			while (result.next()) {
 				if (result != null) {
-					ReportResult rr = new ReportResult(result.getString(1), result.getString(2), result.getInt(3));
+					ReportResult rr = new ReportResult(result.getString(1), result.getString(2), result.getInt(3), result.getDouble(4));
 					results.add(rr);
 				}
 			}

@@ -31,7 +31,9 @@ public class TagReportListenerImplementation implements TagReportListener {
 		for (Tag t : tags) {
 			// Lay thong tin tag id
 			String tagId = t.getEpc().toString();
-
+			
+			System.out.println(tagId);
+			
 			// Lay thoi diem hien tai
 			long timestamp = System.currentTimeMillis();
 

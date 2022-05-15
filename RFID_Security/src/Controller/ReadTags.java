@@ -8,7 +8,8 @@ import java.util.Scanner;
 
 
 public class ReadTags {
-	static ImpinjReader reader;
+	static ImpinjReader reader = new ImpinjReader();
+	
 	public static void startReading() {
 		try {
 			reader.start();
@@ -27,9 +28,7 @@ public class ReadTags {
 
     public ReadTags() {
     	try {
-            String hostname = "192.168.1.1";
-            
-            reader = new ImpinjReader();
+            String hostname = "192.168.1.1";            
 
             System.out.println("Connecting");
             reader.connect(hostname);

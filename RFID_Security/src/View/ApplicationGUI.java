@@ -77,6 +77,8 @@ public class ApplicationGUI extends JFrame {
 	private DatePicker dpReportTo;
 
 	private static JTextField txtReportTotalQuantity;
+	
+	private static JTextField txtReportTotalValue;
 
 	private static ArrayList<HistoryResult> histories = new ArrayList<>();
 
@@ -87,9 +89,12 @@ public class ApplicationGUI extends JFrame {
 	private static ArrayList<ProductLine> productLines = new ArrayList<>();
 
 	static int totalQuantity = 0;
+	
+	static double totalValue = 0;
 
 	String selectedTagID = "";
 	int selectedUserID = 0;
+	
 
 	public ApplicationGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -150,7 +155,7 @@ public class ApplicationGUI extends JFrame {
 		recentPanel.add(scrollPane);
 
 		tblRecent = new JTable();
-		tblRecent.setFont(new Font("Malgun Gothic", Font.PLAIN, 12));
+		tblRecent.setFont(new Font("Malgun Gothic", Font.PLAIN, 14));
 
 		scrollPane.setViewportView(tblRecent);
 		tblRecent.setModel(recentModel);
@@ -189,7 +194,7 @@ public class ApplicationGUI extends JFrame {
 		historyModel.setColumnIdentifiers(historyColumn);
 
 		tblHistory = new JTable();
-		tblHistory.setFont(new Font("Malgun Gothic", Font.PLAIN, 12));
+		tblHistory.setFont(new Font("Malgun Gothic", Font.PLAIN, 14));
 		tblHistory.setBackground(Color.WHITE);
 		scrollPane_2.setViewportView(tblHistory);
 		tblHistory.setModel(historyModel);
@@ -324,12 +329,12 @@ public class ApplicationGUI extends JFrame {
 		leftReportPanel.add(scrollPane_1, "cell 0 0,grow");
 
 		reportModel = new DefaultTableModel();
-		Object[] reportColumn = { "Product line ID", "Product line name", "Quantity" };
-		reportRow = new Object[3];
+		Object[] reportColumn = { "Product line ID", "Product line name", "Quantity" , "Price", "Total" };
+		reportRow = new Object[5];
 		reportModel.setColumnIdentifiers(reportColumn);
 
 		tblReport = new JTable();
-		tblReport.setFont(new Font("Malgun Gothic", Font.PLAIN, 12));
+		tblReport.setFont(new Font("Malgun Gothic", Font.PLAIN, 14));
 		tblReport.setBackground(Color.WHITE);
 		scrollPane_1.setViewportView(tblReport);
 		tblReport.setModel(reportModel);
@@ -396,7 +401,7 @@ public class ApplicationGUI extends JFrame {
 				}
 				String result = FileController.exportReportFile(dpReportFrom.getDateStringOrEmptyString(),
 						dpReportTo.getDateStringOrEmptyString(), cbxReportStatus.getSelectedItem().toString(),
-						totalQuantity, reports);
+						totalQuantity, totalValue, reports);
 				alert(result);
 
 			}
@@ -417,6 +422,17 @@ public class ApplicationGUI extends JFrame {
 		rightReportPanel.add(txtReportTotalQuantity, "cell 0 13,growx");
 		txtReportTotalQuantity.setColumns(10);
 		txtReportTotalQuantity.setText(String.valueOf(totalQuantity));
+		
+		JLabel lblNewLabel_3_1 = new JLabel("Total value");
+		rightReportPanel.add(lblNewLabel_3_1, "cell 0 14");
+		
+		txtReportTotalValue = new JTextField();
+		txtReportTotalValue.setText("0");
+		txtReportTotalValue.setFont(new Font("Malgun Gothic", Font.PLAIN, 14));
+		txtReportTotalValue.setEditable(false);
+		txtReportTotalValue.setColumns(10);
+		txtReportTotalValue.setBackground(new Color(248, 248, 255));
+		rightReportPanel.add(txtReportTotalValue, "cell 0 15,growx");
 
 		btnReport.addMouseListener(new MouseAdapter() {
 			@Override
@@ -471,7 +487,7 @@ public class ApplicationGUI extends JFrame {
 				selectedTagID = (String) tblTag.getValueAt(tblTag.getSelectedRow(), 0);
 			}
 		});
-		tblTag.setFont(new Font("Malgun Gothic", Font.PLAIN, 12));
+		tblTag.setFont(new Font("Malgun Gothic", Font.PLAIN, 14));
 		tblTag.setBackground(Color.WHITE);
 		scrollPane_12.setViewportView(tblTag);
 		tblTag.setModel(tagModel);
@@ -538,7 +554,7 @@ public class ApplicationGUI extends JFrame {
 		productModel.setColumnIdentifiers(productColumn);
 
 		tblProduct = new JTable();
-		tblProduct.setFont(new Font("Malgun Gothic", Font.PLAIN, 12));
+		tblProduct.setFont(new Font("Malgun Gothic", Font.PLAIN, 14));
 		tblProduct.setBackground(Color.WHITE);
 		scrollPane_21.setViewportView(tblProduct);
 		tblProduct.setModel(productModel);
@@ -563,14 +579,19 @@ public class ApplicationGUI extends JFrame {
 	public static void updateReport() {
 		reportModel.setRowCount(0);
 		totalQuantity = 0;
+		totalValue = 0;
 		for (ReportResult rp : reports) {
 			reportRow[0] = rp.getProductLineID();
 			reportRow[1] = rp.getProductLineName();
 			reportRow[2] = String.valueOf(rp.getQuantity());
+			reportRow[3] = String.valueOf(rp.getPrice());
+			reportRow[4] = String.valueOf(rp.getQuantity() * rp.getPrice());
 			reportModel.addRow(reportRow);
 			totalQuantity += rp.getQuantity();
+			totalValue += rp.getQuantity() * rp.getPrice();
 		}
 		txtReportTotalQuantity.setText(String.valueOf(totalQuantity));
+		txtReportTotalValue.setText(String.valueOf(totalValue));
 		tblReport.revalidate();
 		tblReport.repaint();
 	}
